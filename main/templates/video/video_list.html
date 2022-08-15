@@ -1,0 +1,26 @@
+{% load static %}
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>video list</title>
+</head>
+<body>
+  <div>
+    <header>
+      <h1>video list</h1>
+      <a href="/main/new">new video</a>
+    </header>
+  </div>
+  <div>
+    <div>
+      {% for video in video_list %}
+        <a href="/main/{{ video.id }}">
+          <h4>{{ video.title }}</h4>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</body>
+</html>
