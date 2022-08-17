@@ -9,15 +9,7 @@
 </head>
 <body>
   <div>
-    <form method="POST" action="/to_do/new_todo/{{todo.pk}}">
-      {% csrf_token %}
-      <div>
-        {{ todo_form }}
-      </div>
-      <button type="submit">submit</button>
-    </form>
-  </div>
-  <div>
+    {% block new_todo %}{% endblock new_todo %}
     {% for todo in todo_list %}
       <hr>
       <input id="check" type="checkbox" name="todo" value="done">

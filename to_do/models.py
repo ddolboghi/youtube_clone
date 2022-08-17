@@ -7,4 +7,7 @@ class ToDo(models.Model):
   updated_at = models.DateTimeField(auto_now=True)
   
   def __str__(self):
-    return f'To do({self.pk})'  
+    return f'To do({self.pk})'
+  
+  def get_absolute_url(self):
+    return f'/to_do/{self.pk}/'
