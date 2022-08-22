@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect
 from .models import ToDo
 from django.views.generic import ListView, CreateView
 from .form import ToDoForm
@@ -15,9 +15,5 @@ class ToDoNew(CreateView):
 def delete_todo(request, pk):
   todo = get_object_or_404(ToDo, pk=pk)
   todo.delete()
-  # todo_list = ToDo.objects.order_by('-pk')
-  # context = {'todo_list': todo_list}
-  # if pk is not None:
-  #   return render(request, 'to_do/todo_list.html', context)
   return redirect('list')
   
