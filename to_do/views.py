@@ -9,7 +9,7 @@ class ToDoList(ListView):
 
 class ToDoNew(CreateView):
   form_class = ToDoForm
-  success_url = 'list'
+  success_url = '/to_do'
   template_name = 'to_do/new_todo.html'
   
 def delete_todo(request, pk):

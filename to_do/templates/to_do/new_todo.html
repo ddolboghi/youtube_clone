@@ -1,10 +1,10 @@
-{% extends 'todo_list.html' %}
-{% block new_todo %}
+{% extends 'to_do/base.html' %}
+{% block content %}
 <div>
-  <form method="post">
+  <form method="post" action="{% url 'new' %}">
     {% csrf_token %}
-    {{ forms.ToDoForm.as_p }}
+    {{ form.as_p }}
     <button type="submit">submit</button>
   </form>
 </div>
-{% endblock new_todo %}
+{% endblock content %}

@@ -1,22 +1,13 @@
-<!DOCTYPE html>
-<html lang="ko">
-  {% load static %}
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>To Do</title>
-</head>
-<body>
-  <div>
-    {% block new_todo %}{% endblock new_todo %}
-    {% for todo in todo_list %}
-      <hr>
-      <input id="check" type="checkbox" name="todo" value="done">
-      <h4>{{ todo.content }}</h4>
-      <h4>{{ todo.created_at }}</h4>
-      <a role="button" href="{% url 'delete' todo.pk %}">delete</a>
-    {% endfor %}
-  </div>
-</body>
-</html>
+{% extends 'to_do/base.html' %}
+{% block content %}
+<a role="button" href="{% url 'new' %}">new</a>
+<div>
+  {% for todo in todo_list %}
+  <hr>
+  <input id="check" type="checkbox" name="todo" value="done">
+  <h4>{{ todo.content }}</h4>
+  <h4>{{ todo.created_at }}</h4>
+  <a role="button" href="{% url 'delete' todo.pk %}">delete</a>
+  {% endfor %}
+</div>
+{% endblock content %}
