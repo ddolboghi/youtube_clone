@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from telnetlib import AUTHENTICATION
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -41,6 +42,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'to_do',
+    
+    # django-allauth 라이브러리 설치 후 추가
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google', # 구글 로그인 사용
 ]
 
 MIDDLEWARE = [
@@ -125,3 +133,20 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# 회원가입 설정
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+SITE_ID = 1
+
+# 회원 가입 시 이메일 수신
+ACCOUNT_EMAIL_REQUIRED = True
+
+# 회원 가입 시 이메일 검증
+ACCOUNT_EMAIL_VERIFICATION = 'none' # 안함
+
+# 로그인했을때 redirect될 페이지
+LOGIN_REDIRECT_URL = '/to_do/'

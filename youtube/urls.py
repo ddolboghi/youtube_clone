@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
     path('to_do/', include('to_do.urls')),
+    path('accounts/', include('allauth.urls')), # django-allauth가 사용할 url경로
 ]
