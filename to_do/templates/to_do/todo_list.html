@@ -5,15 +5,22 @@
     <a role="button" href="{% url 'new' %}" class="card-body">new</a>
   </div>
   {% for todo in todo_list %}
-  <div class="card">
+  <div class="card text-center">
     <div class="card-body row align-items-center">
-      <div class="col-lg">
+      <div class="col">
         <h4>{{ todo.content | linebreaks }}</h4>
       </div>
-      <div class="col">
-        <h6>{{ todo.created_at }}</h6>
-      </div>
       <a role="button" href="{% url 'delete' todo.pk %}" class="btn btn-outline-dark">done</a>
+    </div>
+    <div class="card-footer small text-muted">
+      <div class="row">
+        <div class="col">
+          <h6>{{ todo.created_at }}</h6>
+        </div>
+        <div class="col">
+          <p>by {{ todo.author | upper }}</p>
+        </div>
+      </div>
     </div>
   </div>
     {% endfor %}
