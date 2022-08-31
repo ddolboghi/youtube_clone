@@ -2,6 +2,7 @@
 {% block content %}
 {% load socialaccount %}
 <div class="container text-center">
+  <!-- dropdown으로 통합하기 -->
   <div class="card">
     <div class="row">
       <div class="col">  
@@ -20,6 +21,12 @@
       <div class="col">
         <a role="button" class="btn btn-outline-dark btn-block btn-sm" href="{% provider_login_url 'google' %}"><i class="fab fa-google"></i>&nbsp&nbsp Log in with Google</a>
       </div>
+      <div class="col">
+        <a href="/accounts/login/">Log In</a>
+      </div>
+      <div class="col">
+        <a href="/accounts/signup/">Sign Up</a>
+      </div>
       {% endif %}
     </div>
   </div>
@@ -29,7 +36,9 @@
       <div class="col">
         <h4>{{ todo.content | linebreaks }}</h4>
       </div>
+      {% if user.is_authenticated and todo.author == user %}
       <a role="button" href="{% url 'delete' todo.pk %}" class="btn btn-outline-dark">done</a>
+      {% endif %}
     </div>
     <div class="card-footer text-muted">
       <div class="row">
