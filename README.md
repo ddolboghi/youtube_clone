@@ -30,3 +30,7 @@
 
 3. 프로젝트 폴더 urls.py > path('accounts/', include('allauth.urls')),
 4. python manage.py migrate
+
+# 개선사항
+- done 누르면 숨기는 js 추가
+- is_done=True인 데이터들을 done_list.html에 표시하기

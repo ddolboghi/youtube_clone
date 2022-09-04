@@ -1,0 +1,27 @@
+{% extends 'to_do/base.html' %}
+{% block content %}
+{% load socialaccount %}
+<div class="container text-center">
+  {% for done in done_list %}
+  {% if done.is_done == True %}
+    <div class="card">
+      <div class="card-body row align-items-center">
+        <div class="col-10">
+          <p>{{ done.content | linebreaks }}</p>
+        </div>
+      </div>
+      <div class="card-footer text-muted">
+        <div class="row">
+          <div class="col">
+            <h6>{{ done.created_at | date:"Y-m-d"}}</h6>
+          </div>
+          <div class="col">
+            <h6>by {{ done.author | upper }}</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  {% endfor %}
+</div>
+{% endblock content %}

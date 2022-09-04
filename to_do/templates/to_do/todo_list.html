@@ -2,48 +2,24 @@
 {% block content %}
 {% load socialaccount %}
 <div class="container text-center">
-  <!-- dropdown으로 통합하기 -->
-  <div class="card">
-    <div class="row">
-      <div class="col">  
-        <a role="button" href="{% url 'new' %}" class="btn btn-outline-primary btn-block btn-sm">new</a>
-      </div>
-      {% if user.is_authenticated %}
-      <div>
-        <a href="#">
-          {{ user.username }}
-        </a>
-      </div>
-        <div class="col">
-          <a role="button" href="/accounts/logout/" class="btn btn-outline-dark btn-block btn-sm">Log Out</a>
-        </div>
-      {% else %}
-      <div class="col">
-        <a role="button" class="btn btn-outline-dark btn-block btn-sm" href="{% provider_login_url 'google' %}"><i class="fab fa-google"></i>&nbsp&nbsp Log in with Google</a>
-      </div>
-      <div class="col">
-        <a href="/accounts/login/">Log In</a>
-      </div>
-      <div class="col">
-        <a href="/accounts/signup/">Sign Up</a>
-      </div>
-      {% endif %}
-    </div>
-  </div>
   {% for todo in todo_list %}
-  <div class="card">
-    <div class="card-body row align-items-center">
-      <div class="col">
-        <h4>{{ todo.content | linebreaks }}</h4>
+  {% if todo.is_done == False %}
+    <div id="each_todo" class="card">
+      <div class="card-body row align-items-center">
+      <div class="col-10">
+        <p>{{ todo.content | linebreaks }}</p>
       </div>
       {% if user.is_authenticated and todo.author == user %}
-      <a role="button" href="{% url 'delete' todo.pk %}" class="btn btn-outline-dark">done</a>
+      <div class="col">
+        <!-- <a role="button" href="{% url 'delete' todo.pk %}" id="done" class="btn btn-outline-dark">done</a> -->
+        <a href="" id="done" class="btn btn-outline-dark">done</a>
+      </div>
       {% endif %}
     </div>
     <div class="card-footer text-muted">
       <div class="row">
         <div class="col">
-          <h6>{{ todo.created_at }}</h6>
+          <h6>{{ todo.created_at | date:"Y-m-d"}}</h6>
         </div>
         <div class="col">
           <h6>by {{ todo.author | upper }}</h6>
@@ -51,6 +27,7 @@
       </div>
     </div>
   </div>
-    {% endfor %}
+  {% endif %}
+  {% endfor %}
 </div>
 {% endblock content %}

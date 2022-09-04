@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 {% load static %}
 <html lang="ko">
 <head>
@@ -6,10 +5,21 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>To Do</title>
-  <link href="{% static 'blog/bootstrap/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+  <link href="{% static 'to_do/bootstrap/bootstrap.min.css' %}" rel="stylesheet" media="screen">
   <script src="https://kit.fontawesome.com/865415b7db.js" crossorigin="anonymous"></script>
 </head>
 <body>
+  <div class="card">
+  {% include 'to_do/nav.html' %}
   {% block content %}{% endblock content %}
+  </div>
+  <script>
+    let done = document.querySelectorAll("#done");
+    for(let i=0; i<done.length; i++) {
+      done[i].addEventListener("click", function() {
+        this.parentNode.parentNode.parentNode.style.display = "none";
+      });
+    };
+  </script>
 </body>
 </html>
