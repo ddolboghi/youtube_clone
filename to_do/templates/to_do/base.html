@@ -10,10 +10,17 @@
 </head>
 <body>
   <div class="card">
-  {% include 'to_do/nav.html' %}
-  {% block content %}{% endblock content %}
+    <div class="row" style="background-color: rgb(240, 240, 240);">
+        {% include 'to_do/nav.html' %}
+    </div>
+      {% block content %}{% endblock content %}
   </div>
   <script>
+    let listBot = document.querySelectorAll(".text-muted");
+    for(let i=0; i<listBot.length; i++) {
+      listBot[i].style.backgroundColor = "rgb(240, 240, 240)";
+    };
+
     let done = document.querySelectorAll("#done");
     for(let i=0; i<done.length; i++) {
       done[i].addEventListener("click", function() {

@@ -4,14 +4,22 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>video list</title>
+  <title>HOME</title>
+  <link href="{% static 'to_do/bootstrap/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+  <script src="https://kit.fontawesome.com/865415b7db.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <div>
     <header>
-      <h1>video list</h1>
-      <a href="/main/new">new video</a>
+      <div>
+        {% include 'to_do/nav.html' %}
+      </div>
     </header>
+    <div class="container text-center">
+      <h1>video</h1>
+      <a href="/main/new">new video</a><br>
+      <a href="/to_do/">To Do</a>
+    </div>
   </div>
   <div>
     <div>

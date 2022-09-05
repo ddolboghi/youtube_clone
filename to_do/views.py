@@ -37,5 +37,5 @@ class ToDoNew(LoginRequiredMixin, CreateView):
 def delete_todo(request, pk):
   todo = get_object_or_404(ToDo, pk=pk)
   todo.delete()
-  return redirect('list')
+  return redirect('done_list')
   

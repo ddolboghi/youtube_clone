@@ -2,6 +2,9 @@
 {% block content %}
 {% load socialaccount %}
 <div class="container text-center">
+  <div class="card">  
+    <a role="button" href="{% url 'list' %}" id="todoList" style="text-decoration-line: none;">To Do List</a>
+  </div>
   {% for done in done_list %}
   {% if done.is_done == True %}
     <div class="card">
@@ -9,14 +12,19 @@
         <div class="col-10">
           <p>{{ done.content | linebreaks }}</p>
         </div>
+        {% if user.is_authenticated and done.author == user %}
+        <div class="col">
+          <a role="button" href="{% url 'delete' done.pk %}" id="done" class="btn btn-outline-dark">delete</a>
+        </div>
+        {% endif %}
       </div>
-      <div class="card-footer text-muted">
-        <div class="row">
+      <div class="text-muted">
+        <div class="row sm">
           <div class="col">
-            <h6>{{ done.created_at | date:"Y-m-d"}}</h6>
+            <p><i class="fa-solid fa-check"></i> {{ done.updated_at | date:"Y-m-d"}}</p>
           </div>
           <div class="col">
-            <h6>by {{ done.author | upper }}</h6>
+            <p>by {{ done.author | upper }}</p>
           </div>
         </div>
       </div>
