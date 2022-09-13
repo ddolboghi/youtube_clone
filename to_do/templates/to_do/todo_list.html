@@ -7,15 +7,18 @@
   </div>
   {% for todo in todo_list %}
   {% if todo.is_done == False %}
-  <div id="each_todo" class="card">
+  <div id="eachTodo" class="card">
     <div class="card-body row align-items-center">
       <div class="col-10">
         <p>{{ todo.content | linebreaks }}</p>
       </div>
       {% if user.is_authenticated and todo.author == user %}
       <div class="col">
-        <!-- <a role="button" href="{% url 'delete' todo.pk %}" id="done" class="btn btn-outline-dark">done</a> -->
         <a href="{% url 'done' todo.pk %}" id="done" class="btn btn-outline-dark">done</a>
+      </div>
+      {% elif todo.author == NULL %}
+      <div class="col">
+        <a role="button" href="{% url 'delete' todo.pk %}" class="btn btn-outline-dark">delete</a>
       </div>
       {% endif %}
     </div>

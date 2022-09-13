@@ -1,7 +1,6 @@
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from .models import ToDo
 from django.views.generic import ListView, CreateView
-from .form import ToDoForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 class ToDoList(ListView):
@@ -19,20 +18,21 @@ def done_todo(request, pk):
   todo.is_done = True
   todo.save()
   return redirect('list')
-
-class ToDoNew(LoginRequiredMixin, CreateView):
-  form_class = ToDoForm
-  success_url = '/to_do'
-  template_name = 'to_do/new_todo.html'
   
-  def form_valid(self, form):
-    current_user = self.request.user
-    if current_user.is_authenticated:
-      form.instance.author = current_user
-      return super(ToDoNew, self).form_valid(form)
-    else:
-      return redirect('list')
-  
+  # def form_valid(self, form):
+  #   current_user = self.request.user
+  #   if current_user.is_authenticated:
+  #     form.instance.author = current_user
+  #     return super(ToDoNew, self).form_valid(form)
+  #   else:
+  #     return redirect('list')
+    
+def new_todo(request):
+  if request.method == 'POST':
+    content = request.POST.get('content')
+    author = request.user
+    ToDo.objects.create(content=content, author=author)
+  return redirect('list')
 
 def delete_todo(request, pk):
   todo = get_object_or_404(ToDo, pk=pk)

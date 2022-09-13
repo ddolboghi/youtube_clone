@@ -1,5 +1,6 @@
 {% load static %}
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,25 +9,39 @@
   <link href="{% static 'to_do/bootstrap/bootstrap.min.css' %}" rel="stylesheet" media="screen">
   <script src="https://kit.fontawesome.com/865415b7db.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
   <div class="card">
     <div class="row" style="background-color: rgb(240, 240, 240);">
-        {% include 'to_do/nav.html' %}
+      {% include 'to_do/nav.html' %}
     </div>
-      {% block content %}{% endblock content %}
+    <div class="row text-center">
+      <form action="{% url 'new' %}" method="post" name="newForm">{% csrf_token %}
+        <fieldset>
+          <legend>New To Do</legend>
+          <div class="d-flex justify-content-center">
+            <textarea name="content" cols="70" rows="2"></textarea>
+            <button type="submit" class="btn btn-outline-dark">submit</button>
+        </fieldset>
+    </div>
+    </form>
+  </div>
+  {% block content %}{% endblock content %}
   </div>
   <script>
     let listBot = document.querySelectorAll(".text-muted");
-    for(let i=0; i<listBot.length; i++) {
+    for (let i = 0; i < listBot.length; i++) {
       listBot[i].style.backgroundColor = "rgb(240, 240, 240)";
     };
 
     let done = document.querySelectorAll("#done");
-    for(let i=0; i<done.length; i++) {
-      done[i].addEventListener("click", function() {
-        this.parentNode.parentNode.parentNode.style.display = "none";
+    let eachTodo = document.querySelectorAll("#eachTodo");
+    for (let i = 0; i < done.length; i++) {
+      done[i].addEventListener("click", function () {
+        eachTodo[i].style.display = "none";
       });
     };
   </script>
 </body>
+
 </html>
