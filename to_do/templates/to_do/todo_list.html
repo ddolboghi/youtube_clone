@@ -28,7 +28,9 @@
           <p><i class="fa-solid fa-pen"></i> {{ todo.created_at | date:"Y-m-d"}}</p>
         </div>
         <div class="col">
-          <p>by {{ todo.author | upper }}</p>
+          {% if todo.author == NULL %}
+          <p>by Unkonwn</p>
+          {% endif %}
         </div>
       </div>
     </div>

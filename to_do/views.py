@@ -31,11 +31,21 @@ def new_todo(request):
   if request.method == 'POST':
     content = request.POST.get('content')
     author = request.user
-    ToDo.objects.create(content=content, author=author)
+    if author.is_authenticated:
+      cur_user = author
+      ToDo.objects.create(content=content, author=cur_user)
+    else:
+      cur_user = None
+      ToDo.objects.create(content=content, author=cur_user)
   return redirect('list')
 
 def delete_todo(request, pk):
   todo = get_object_or_404(ToDo, pk=pk)
-  todo.delete()
-  return redirect('done_list')
-  
+  cur_user = request.user
+  if cur_user.is_authenticated:
+    todo.delete()
+    return redirect('done_list')
+  else:
+    todo.delete()
+    return redirect('list')
+    
